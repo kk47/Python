@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>form</title>
+<script type="text/javascript" src="jquery-1.11.1.js"></script>
+<script type="text/javascript">
+$(document).ready(function()
+{
+	$("button").click(function()
+	{
+		$("p").hide();
+		$("h1").css("background-color", "red");
+	});
+});
+</script>
+</head>
+
+<body>
+<h1>this is a head line</h1>
+<p>this is a param</p>
+<button type="button">Click me</button>
+
+	<form>
+    	输入名称：<input type="text" name="user" value="" /><br />
+        输入密码：<input type="password" name="password" value=""/><br />
+        选择性别：<input type="radio" name="sex" value="nan"/>男 <input type="radio" name="sex" value="nv" checked="checked" />女<br />
+        选择技术：<input type="checkbox" />JAVA
+        <input type="checkbox" />HTML
+        <input type="checkbox" />SHELL
+        <input type="checkbox" />PYTHON<br /><br />
+        选择文件：<input type="file" name="file" /><br />
+    	一个图片：<input type="image" src="11.jpg" /><br />
+        隐藏组件：<input type="hidden" name="myke" /><br />
+      	一个按钮：<input type="button" value="有个按钮" onclick="alert('很爱很爱')" /><br />
+       
+ 
+ 		<select>
+        	<option value="none">--chose country--</option>
+            <option value="zh">china</option>
+            <option value="usa">usa</option>
+            <option value="en">en</option>
+        </select>
+    	<input type="reset" value="清除数据" />
+        <input type="submit" value="提交" />
+    </form>
+	
+
+</body>
+</html>

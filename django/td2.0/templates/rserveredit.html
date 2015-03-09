@@ -1,0 +1,162 @@
+    {% extends "base.html" %}
+    {% block head %}
+   <script language="javascript">
+  function find(sFind, sObj)
+   {
+     var nSize = sFind.length;
+     var nLen = sObj.length;
+
+     var sCompare;
+
+     if(nSize <= nLen ){
+         for(var i = 0; i <= nLen - nSize + 1; i++){
+             sCompare = sObj.substring(i, i + nSize);
+             if(sCompare == sFind){
+                 return i;
+             }
+         }
+     }
+
+     return -1;
+ }
+ 
+function findEach(vDatatxt,idname,keyword){
+     var sFind = document.getElementById(keyword).value;
+     if(sFind==""){
+         alert("Can not be empty.");
+     }
+
+     if(sFind!=""){
+         var nPos;
+         var vResult = [];
+         //for(var i = 0; i <= vData.length; i++){
+         var vData=vDatatxt.split(',');
+         for(var i in vData){
+             var sTxt=vData[i]||'';
+             nPos = find(sFind, sTxt);
+
+             //nPos=sTxt.indexOf(sFind);
+             if(nPos>=0){
+                 vResult[vResult.length] = sTxt;
+             }
+         }
+         var list=''
+                 
+       for(var i=0,b=1;i<vResult.length;i++,b++ ){
+                
+            list+='<option value="'+b+'">'+vResult[i]+'</option>'
+         }
+         $("#"+idname).html(list)
+     }
+ }
+
+</script>
+    {% endblock %}
+    {% block content %}    
+	<h2><a href="javascript:void(0)">首页</a>&gt;&gt;<a href="javascript:void(0)">服务详细登记</a></h2>
+   <form action="" method="post">
+	<ul class="Exid">
+        	<li>
+            <label for="id_ip">IP地址:</label>
+            {{ form.ip }}
+	  <label style="color: red;width:40px;">(必选)</label>
+        </li>
+        <li>
+            <label for="id_device">设备类型:</label>
+            {{ form.device }}
+        </li>
+        <li>
+            <label for="id_devices">设备型号:</label>
+            {{ form.devices }}
+		<label style="color: red;width:40px;">(必选)</label>
+        </li>
+              <li>
+            <label for="id_mouth">对联交换口:</label>
+            {{ form.mouth }}
+			  <label style="color: red;width:40px;">(必选)</label>
+        </li>
+        <li>
+            <label for="id_fuwu">运行服务:</label>
+            {{ form.fuwu }}
+			  <label style="color: red;width:40px;">(必选)</label>
+        </li>
+		 <li>
+            <label for="id_version">服务版本:</label>
+            {{ form.version }}
+			  <label style="color: red;width:40px;">(必选)</label>
+        </li>
+		   <li>
+            <label for="id_ports">服务端口:</label>
+            {{ form.ports }}
+                          <label style="color: red;width:40px;">(必选)</label>
+        </li>
+          <li>
+            <label for="id_configid">Confidig:</label>
+            {{ form.configid }}
+                          <label style="color: red;width:40px;">(必选)</label>
+        </li>
+           <li>
+            <label for="id_whoandyou">被谁依赖:</label>
+            {{ form.whoandyou }}
+            <label style="color: red;width:40px;">(必选)</label>
+        </li>
+	           <li>  
+            <label for="id_youandwho">依赖于谁:</label>
+            {{ form.youandwho }}
+            <label style="color: red;width:40px;">(必选)</label>
+        </li>
+<li>
+		 </li>
+		<li>
+        	<label style="margin:0;width:160px;">输入关键字查找MAC地址</label>
+            <input id='idmac' >
+        	<label style="width:100px;">网卡 MAC查询</label> 
+            <select id="id_idmac" name="idmac"  style="float:left">
+                    <option value="">请选择</option>
+            </select>
+            <label style="color: red;width:40px;">(必选)</label>
+			</li>
+			<li>
+			<input type="button" onclick="findEach('{{ eth0 }}','id_idmac','idmac')" value="eth0 MAC 搜索" />
+			<input type="button" onclick="findEach('{{ eth1 }}','id_idmac','idmac')" value="eth1 MAC 搜索" />
+			<input type="button" onclick="findEach('{{ eth2 }}','id_idmac','idmac')" value="eth2 MAC 搜索" />
+			<input type="button" onclick="findEach('{{ eth3 }}','id_idmac','idmac')" value="eth3 MAC 搜索" />
+			</li>
+			<li>
+        </li>
+		<li>
+
+                           <label style="margin:0;">输入关键字查找机柜</label>
+            <input id='idroom' >
+                        <input type="button" onclick="findEach('{{ datalist }}','id_idroom','idroom')" value="查询" />
+                <label style="width:60px;">机柜</label>
+            <select id="id_idroom" name="idroom"  style="float:left">
+                    <option value="">请选择</option>
+            </select>
+            <label style="color: red;width:40px;">(必选)</label>
+        </li>
+
+         <li>
+
+                           <label style="margin:0;">输入关键字查找交换机</label>
+            <input id='idswitch' >
+                        <input type="button" onclick="findEach('{{ switchlist }}','id_idswitch','idswitch')" value="查询" />
+                <label style="width:60px;">交换机</label>
+            <select id="id_idswitch" name="idswitch"  style="float:left">
+                    <option value="">请选择</option>
+            </select>
+            <label style="color: red;width:40px;">(必选)</label>
+        </li>
+
+                <li>
+                <input type="submit" value="提交" style="margin-left:150px;">
+                        <input type="reset" value="重置" style="margin-left:150px;">
+                        </li>
+
+
+        </ul>
+		</form> 
+    
+
+
+        {% endblock %}

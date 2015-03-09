@@ -1,0 +1,114 @@
+    {% extends "base.html" %}
+    {% block head %}
+   <script language="javascript">
+//  var vDatatxt = " {{ datalist }}";
+  function find(sFind, sObj)
+   {
+     var nSize = sFind.length;
+     var nLen = sObj.length;
+
+     var sCompare;
+
+     if(nSize <= nLen ){
+         for(var i = 0; i <= nLen - nSize + 1; i++){
+             sCompare = sObj.substring(i, i + nSize);
+             if(sCompare == sFind){
+                 return i;
+             }
+         }
+     }
+
+     return -1;
+ }
+ 
+function findEach(vDatatxt,idname,keyword,ids){
+     var sFind = document.getElementById(keyword).value;
+     if(sFind==""){
+         alert("Can not be empty.");
+     }
+
+     if(sFind!=""){
+         var nPos;
+         var vResult = [],
+		 	values=[];
+         //for(var i = 0; i <= vData.length; i++){
+         var vData=vDatatxt.split(','),
+		 	vid=ids.split(',');
+         for(var i in vData){
+             var sTxt=vData[i]||'';
+             nPos = find(sFind, sTxt);
+
+             //nPos=sTxt.indexOf(sFind);
+             if(nPos>=0){
+                 vResult[vResult.length] = sTxt;
+				 for(var a=0; a<vData.length; a++){
+					 if(vData[a]==sTxt)values.push(a);
+				 }
+				 
+             }
+         }
+         var list='';
+       for(var i=0;i<vResult.length;i++){
+			// alert( vResult+">>>"+values[i])
+            list+='<option value="'+vid[values[i]]+'">'+vResult[i]+'</option>'
+         }
+         $("#"+idname).html(list)
+     }
+ }
+
+</script>
+    {% endblock %}
+    {% block content %}    
+	<h2><a href="javascript:void(0)">首页</a>&gt;&gt;<a href="javascript:void(0)">添加网络设备</a></h2>
+   <form action="" method="post">
+	<ul class="Exid">
+        	<li>
+            <label for="id_ip">IP地址:</label>
+            {{ form.ip }}
+	<font color="red" >{{ form.errors.ip }}</font>
+        </li>
+        <li>
+            <label for="id_device">设备类型:</label>
+            {{ form.device }}
+        </li>
+        <li>
+            <label for="id_devices">设备型号:</label>
+            {{ form.devices }}
+	<font color="red" >{{ form.errors.devices }}</font>
+        </li>
+	     <li>
+            <label for="id_paihao">交换机位置:</label>
+            {{ form.paihao }}
+        <font color="red" >{{ form.errors.paihao }}</font>
+        </li>
+		   <li>
+            <label for="id_paihao">交换机总口数:</label>
+            {{ form.port }}
+        <font color="red" >{{ form.errors.port }}</font>
+        </li>
+		<li>
+
+                           <label style="margin:0;">输入关键字查找机柜</label>
+            <input id='idroom' >
+		<!--{{ datalist }}
+       " {% for id in datalist1%}"
+             //{{ id.jigui }}
+            idarr.push(  "{{ id.id }}");
+        "{% endfor %} "-->
+                        <input type="button" onclick="findEach('{% for id in datalist1%}{{ id.jigui }},{% endfor %}','id_idroom','idroom','{% for id in datalist1%}{{ id.id }},{% endfor %}')" value="查询" />
+                <label style="width:60px;">机柜</label>
+            <select id="id_idroom" name="idroom"  style="float:left">
+                    <option value="">请选择</option>
+            </select>
+	 <font color="red" >{{ form.errors.devices }}</font>
+        </li>
+		<li>
+        	<input type="submit" value="提交" style="margin-left:150px;">
+			<input type="reset" value="重置" style="margin-left:150px;">
+			</li>
+        </ul>
+		</form> 
+    
+
+
+        {% endblock %}

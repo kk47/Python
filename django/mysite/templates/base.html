@@ -1,0 +1,17 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html lang="en">
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    </head>
+<body style="background:#DBFDAB">
+    <h1>My helpful personal site</h1>
+    {% block content %}{% endblock %}
+    {% block footer %}
+    <hr>
+    <p>Thanks for visiting my site.</p>
+    <div>
+    <a href=http://user.qzone.qq.com/894915081>blog</a>|<a href=https://github.com/kk47/dragon>github</a>|<a href=/contact/> Contact us </a>
+    </div>
+    {% endblock %}
+</body>
+</html>

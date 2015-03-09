@@ -1,0 +1,23 @@
+<!DOCTYPE html >
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>LINUXQQ V0.2运维系统</title>
+</head>
+<body>
+<div class="container">
+        <center>
+        {% if error %}
+                <p style="color: red;">你输入的用户名密码不正确！！</p>
+        {% endif %}
+        <form class="form-horizontal" action="" method="POST">
+               <p> <input class="span3" type="text" name="username"  placeholder="输入用户名"></p>
+                <p><input class="span3" type="password" name="password" class="input-small" placeholder="输入密码"></p> 
+                <button class="btn" type="submit">登录</button>&nbsp; &nbsp; <button class="btn" type="reset">重置</button>
+        </form>
+        </center>
+
+</div>
+</body>
+</html>
+

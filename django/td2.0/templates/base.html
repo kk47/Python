@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>LINUXQQ V0.2运维系统</title>
+<script src="/static/js/jquery-1.4.4.js"></script>
+<script>
+function pops(url,id){
+	if(confirm("如果重建将会丢失以往所有此IP地址的RRD数据？你确认重建吗?"))window.location.href=url+id;
+}
+
+function del(url,del,id){
+	if(confirm("你确认删除此项数据吗?"))window.location.href= "/"+url+del+id;
+}
+</script>
+{% block head %} {% endblock %}
+<link href="/static/css/css.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div class="top">
+    <div class="main">
+        <h1><a href="/">LINUXQQ V0.2运维系统</a></h1>
+        <div class="loading">
+        欢迎！
+        	<a href="/user/change_pass/">管理员密码修改</a>
+        	<a href="/logout/">注销</a>
+        </div>
+        <div class="clear"></div>
+        <div class="select">
+            <label>请选择机房</label>
+            <select>
+                <option>世纪互联</option>
+                <option>鹏博士IDC</option>
+                <option>兆维</option>
+            </select>
+       </div>
+       <div class="search">
+       	    <form class="form-horizontal" action="/search/" method="GET">
+                <input class="span2" type="text" name="q"  value="输入需要查找的内容" onfocus="if(this.value=='输入需要查找的内容')this.value=''" onblur="if(this.value=='')this.value='输入需要查找的内容'">
+				 <select  name="content"  style="float:left">
+                    <option value="1">机柜</option>
+					<option value="2">MAC地址</option>
+					<option value="3">IP地址</option>
+					<option value="4">服务</option>
+            </select>
+                <button class="btn" type="submit">搜一下</button>
+        </form>
+
+       </div>
+    </div>
+</div>
+<div class="main">
+	<ul class="menu">
+    	<li class="radius-top">
+			<a href="/">系统首页</a>
+		</li>
+    	<li>
+        	<a href="javascript:void(0)"><font>设备管理</font></a>
+            <ol class="hide">
+            	<li><a href="/jigui/" style="color:#000000">机柜管理</a></li>
+            	<li><a href="/switch/" style="color:#000000">网络设备管理</a></li>
+            	<li><a href="/yserver/" style="color:#000000">服务器管理</a></li>
+		<li><a href="/repair/" style="color:#000000">服务器维修历史</a></li>
+            </ol>
+        </li>
+
+    	<li>
+        	<a href="javascript:void(0)"><font>服务管理</font></a>
+            <ol class="hide">
+                <li><a href="/rserver/" style="color:#000000"> 服务详细登记</a></li>
+                <li><a href="/ipaddr/" style="color:#000000">IP地址管理</a></li>
+            </ol>
+        </li>
+    	<li>
+        	<a href="javascript:void(0)"><font>监控管理</font></a>
+            <ol class="hide">
+            	<li><a href="/cacti/" style="color:#000000">服务器监控</a></li>
+				<li><a href="/swcacti/" style="color:#000000">交换机监控</a></li>
+            </ol>
+        </li>
+    	<li class="radius-bottom">
+        	<a href="javascript:void(0)">配置管理</a>
+        </li>
+    </ul>
+    <div class="content">
+    	{% block content %} {% endblock %}
+    	    <div style="width:650px; float:left; overflow:hidden; margin-left:30px;"  align="right" >
+    	                    {% if data.has_previous %}
+    	                            <a href="?page={{ room.pervious_page_number }}" style="color:#3300CC"  >上一页</a>
+    	                                    {% endif %}
+    	                                    	 {% if data.number %}
+    	                                            当前页 {{ data.number }} 共 {{ data.paginator.num_pages }}
+    	                                            {% endif %}
+    	                                                    {% if data.has_next %}
+    	                                                            <a href="?page={{ data.next_page_number }}" style="color:#3300CC">下一页</a>
+
+    {% endif %}
+
+    </div>
+
+    </div>
+</div>
+
+<script>
+var menu=$(".menu>li");
+if($(menu).find("ol")){
+	$(menu).find(">a").click(function(){
+		$(this).parent().find("ol").slideToggle();
+	});
+}
+</script>
+	
+
+</body>
+</html>

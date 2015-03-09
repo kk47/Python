@@ -1,0 +1,90 @@
+    {% extends "base.html" %}
+    {% block head %}
+   <script language="javascript">
+  function find(sFind, sObj)
+   {
+     var nSize = sFind.length;
+     var nLen = sObj.length;
+
+     var sCompare;
+
+     if(nSize <= nLen ){
+         for(var i = 0; i <= nLen - nSize + 1; i++){
+             sCompare = sObj.substring(i, i + nSize);
+             if(sCompare == sFind){
+                 return i;
+             }
+         }
+     }
+
+     return -1;
+ }
+ 
+function findEach(vDatatxt,idname,keyword){
+     var sFind = document.getElementById(keyword).value;
+     if(sFind==""){
+         alert("Can not be empty.");
+     }
+
+     if(sFind!=""){
+         var nPos;
+         var vResult = [];
+         //for(var i = 0; i <= vData.length; i++){
+         var vData=vDatatxt.split(',');
+         for(var i in vData){
+             var sTxt=vData[i]||'';
+             nPos = find(sFind, sTxt);
+
+             //nPos=sTxt.indexOf(sFind);
+             if(nPos>=0){
+                 vResult[vResult.length] = sTxt;
+             }
+         }
+         var list=''
+                 
+       for(var i=0,b=1;i<vResult.length;i++,b++ ){
+                
+            list+='<option value="'+b+'">'+vResult[i]+'</option>'
+         }
+         $("#"+idname).html(list)
+     }
+ }
+
+</script>
+    {% endblock %}
+    {% block content %}    
+	<h2><a href="javascript:void(0)">首页</a>&gt;&gt;<a href="javascript:void(0)">服务器维修记录</a></h2>
+   <form action="" method="post">
+	<ul class="Exid">
+<li style="height: 80px;">
+<label for="id_reapir" style="width: 70px;">维修记录:</label>
+<textarea id="id_repair" rows="10" name="repair" cols="40" style="height: 80px; float: left;"></textarea>
+<label style="color: red;width:40px;">(必选)</label>
+</li>
+		<li>
+        	<label style="margin:0;width:160px;">输入关键字查找MAC地址</label>
+            <input id='idmac' >
+        	<label style="width:100px;">网卡 MAC查询</label> 
+            <select id="id_idmac" name="idmac"  style="float:left">
+                    <option value="">请选择</option>
+            </select>
+            <label style="color: red;width:40px;">(必选)</label>
+			</li>
+			<li>
+			<input type="button" onclick="findEach('{{ eth0 }}','id_idmac','idmac')" value="eth0 MAC 搜索" />
+			<input type="button" onclick="findEach('{{ eth1 }}','id_idmac','idmac')" value="eth1 MAC 搜索" />
+			<input type="button" onclick="findEach('{{ eth2 }}','id_idmac','idmac')" value="eth2 MAC 搜索" />
+			<input type="button" onclick="findEach('{{ eth3 }}','id_idmac','idmac')" value="eth3 MAC 搜索" />
+			</li>
+
+                <li>
+                <input type="submit" value="提交" style="margin-left:150px;">
+                        <input type="reset" value="重置" style="margin-left:150px;">
+                        </li>
+
+        </ul>
+		</form> 
+    
+
+
+        {% endblock %}

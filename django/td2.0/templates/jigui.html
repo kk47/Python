@@ -1,0 +1,22 @@
+    {% extends "base.html" %}
+    {% block content %}    
+	<h2><a href="/">首页</a>&gt;&gt;<a href="/jigui/">机柜管理</a></h2>
+	<div align="right"><h3><a href="/jigui/add/" style="color:#B60000; font-size:14px;">添加机柜</a></h3></div>
+	{% if data %}
+	<dl>
+        	<dt>
+		<h3>机房名称</h3>
+		<h3>机柜编号</h3>
+		<h3>操作</h3>
+            </dt>
+		 {% for server in data %}
+            <dd>
+		<h4>{{ server.jifang }}</h4>
+		<h4>{{ server.jigui }} </h4>
+		<h4><a href="/jigui/edit/{{ server.id}}" style="color:#B60000; font-size:14px;">修改</a>&nbsp;&nbsp;<a  href="#this" onclick="del({{server.id}})" style="color:#B60000; font-size:14px;">删除</a></h4>
+            </dd>
+		{% endfor %}
+			<div class="clear"></div>
+        </dl>
+	{% endif %}
+        {% endblock %}

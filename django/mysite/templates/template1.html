@@ -1,0 +1,12 @@
+{% extends "base.html" %}    
+{% block title %} The current time{% endblock %}
+
+{% block content %}
+{% if m_list %}
+    <ul>
+        {% for list in m_list %}
+        <li>{{ list }}.</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+{% endblock%}

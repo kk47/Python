@@ -1,0 +1,38 @@
+    {% extends "base.html" %}
+    {% block content %}    
+	<h2><a href="/">首页</a>&gt;&gt;<a href="javascript:void(0)">机柜管理</a></h2>
+   <form action="" method="post">
+	<ul class="Exid">
+	         
+        	<li>       
+           <label for="id_jifang">机房名称:</label>
+            {{ form.jifang }}
+        </li>
+	
+        <li>
+            <label for="id_jigui">机柜编号:</label>
+            {{ form.jigui }}
+	 <font color="red" >{{ form.errors.jigui }}</font>
+        </li>
+
+        <li>
+             <label for="id_start_time">开始时间:</label>
+            {{ form.start_time }}
+	<font color="red" >{{ form.errors.start_time }}</font>
+        </li>
+        <li> 
+            <label for="id_end_time">结束时间:</label>
+            {{ form.end_time }}
+	<font color="red"> {{ form.errors.end_time }}</font>
+        </li>
+ 
+		<li>
+        	<input type="submit" value="提交" style="margin-left:150px;">
+			<input type="reset" value="重置" style="margin-left:150px;">
+			</li>
+        </ul>
+		</form> 
+    
+
+
+        {% endblock %}

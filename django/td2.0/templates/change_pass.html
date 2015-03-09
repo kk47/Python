@@ -1,0 +1,32 @@
+    {% extends "base.html" %}
+    {% block content %}    
+	<h2><a href="/">首页</a>&gt;&gt;<a href="javascript:void(0)">机柜管理</a></h2>
+   <form action="" method="post">
+	<ul class="Exid">
+        <li>
+            <label for="id_old_password">旧密码:</label>
+            {{ form.old_password }}
+	 <font color="red" >{{ form.errors.old_password }}</font>
+        </li>
+
+        <li>
+             <label for="id_new_password1">新密码:</label>
+            {{ form.new_password1 }}
+	<font color="red" >{{ form.errors.new_password1 }}</font>
+        </li>
+        <li> 
+            <label for="id_new_password2">新密码确认:</label>
+            {{ form.new_password2 }}
+	<font color="red"> {{ form.errors.new_password2 }}</font>
+        </li>
+ 
+		<li>
+        	<input type="submit" value="提交" style="margin-left:150px;">
+			<input type="reset" value="重置" style="margin-left:150px;">
+			</li>
+        </ul>
+		</form> 
+    
+
+
+        {% endblock %}

@@ -1,0 +1,158 @@
+
+body{
+	margin:0px;padding:0px; font-family:Arial,"微软雅黑"; font-size:14px; background:#CFCFCF;color:#303639;
+}
+div,form,img,ul,ol,li,dl,dt,dd,span,p, h1{
+	margin:0px;padding:0px;border:none;vertical-align:top
+}
+*{
+	marign:0;
+}
+ul,dl,ol{
+	list-style-type:none;
+}
+
+.top{
+	height:105px;
+	background:url(../img/top_bg.gif);
+	padding-top:20px;
+}
+a:link,a:visited{
+	color:#fff; text-decoration:none
+}
+.show{
+	display:block
+}
+.hide{
+	display:none
+}
+.clear{
+	clear:both;height:0; line-height:0; font-size:0;
+}
+.select,.search{
+	margin:40px 30px 0 15px; color:#fff; float:left
+}
+.select select,.search select{
+	margin:0 10px; height:23px;
+}
+.Exid li{
+	margin:10px 0 10px 30px; height:21px;
+}
+.Exid li input{
+	float:left;
+}
+.Exid li input.text{
+	border:1px solid #ccc; height:21px; line-height:21px; padding:0 5px; margin-left:5px;
+}
+.Exid li label{
+	width:140px; text-align:right;float:left; margin:0 10px;
+}
+h1 a{
+	font-size:20px; margin:5px 40px 0 15px; float:left
+}
+.subnav{
+	 float:left; padding-top:10px
+}
+.subnav a{
+	margin:0 10px;
+}
+.loading{
+	float:right; padding-top:10px; color:#fff
+}
+.loading a{
+	margin:0 5px;
+}
+.main{
+	 margin:0 auto; padding:0 45px 0 220px;
+}
+.menu{
+	width:185px; float:left; border-radius:5px; margin:15px 15px 0 0; background:#85D2FE; margin-left:-200px;
+}
+.menu>li>a{
+	background:url(../img/menu_bg.gif); color:#fff; cursor:pointer; border-top:1px solid #5AB6E9; border-bottom:1px solid #02283D; position:relative;height:55px; line-height:55px;  padding-left:20px;display:block
+}
+.menu>li.radius-top a{
+	border-top-left-radius:5px;
+	border-top-right-radius:5px;
+}
+.menu>li.radius-bottom a{
+	border-bottom-left-radius:5px;
+	border-bottom-right-radius:5px;
+	border-bottom-color:#034C75
+}
+.menu ol{
+	 padding:15px;
+}
+.menu ol li{
+	height:28px; border-bottom:1px dashed #A4A4A2; padding:0 15px; line-height:28px; cursor:pointer; color:#333;
+}
+.menu ol li.bordernone{
+	border:0;
+}
+.menu>li>a>font{
+	display:block;height:55px; line-height:55px; background:url(../img/menu_icon.gif) no-repeat 140px center;
+}
+.content{
+	 background:#F0EFED;
+	border-radius:5px;
+	width:100%;
+	float:left;
+	margin-top:15px;
+	padding:15px 15px 80px 15px;
+}
+.content h2{
+	height:20px; font-size:14px; margin:0 0 15px 0; padding:0;
+}
+.content h2 a:link,.content h2 a{
+	color:#006; margin:0 5px;
+}
+table td,table th{
+	border-right:1px solid #fff;
+	border-top:1px solid #fff;
+	height:30px;
+	line-height:30px;
+	text-align:center;
+}
+table{
+	border-bottom:1px solid #fff;
+	border-left:1px solid #fff;
+}
+dl dt h3{
+	background:#00597E; margin:0; color:#FFFFFF;
+}
+dl dd h4{
+	background:#DAEFF4; margin:0; color:#00597E;
+}
+table td a,table td a:link,table td a:visited{
+	color:#06F;
+}
+table td a.red:link,table td a.red{
+	color:#f00;
+}
+dl{
+	border-left:1px solid #fff;
+}
+dl dt,dl dd{
+	float:left;border-bottom:1px solid #fff;  width:auto
+}
+dl dt h3,dl dd h4{
+	 height:20px; 
+	 font-family:"微软雅黑";
+	 font-size:14px;
+	 line-height:20px; text-align:center; padding:10px 10px; border-top:1px solid #fff; border-right:1px solid #fff;
+}
+
+
+
+.page{
+	height:30px; line-height:30px; text-align:right
+}
+.page a{
+	color:#333; margin:0 5px;
+}
+.page a.on,.page a.on:hover{
+	color:#999; text-decoration:none;
+}
+.page a:hover,.page a.hover{
+	text-decoration:underline; color:#06F
+}

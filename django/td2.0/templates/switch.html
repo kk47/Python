@@ -1,0 +1,28 @@
+    {% extends "base.html" %}
+    {% block content %}    
+	<h2><a href="/">首页</a>&gt;&gt;<a href="javascript:void(0)">网络设备管理</a></h2>
+	<div align="right"><h3><a href="/switch/add/" style="color:#B60000; font-size:14px;">添加网络设备管理</a></h3></div>
+	{% if data %}
+	<dl>
+        	<dt>
+            	<h3 >IP管理地址</h3>
+            	<h3>设备类型</h3>
+            	<h3>设备型号</h3>
+		<h3>所属机柜</h3>
+		<h3>交换机位置</h3>
+		<h3>操作</h3>
+            </dt>
+		 {% for server in data %}
+            <dd>
+            	<h4>{{ server.ip }}  </h4>
+            	<h4>{{ server.device }} </h4>
+            	<h4>{{ server.devices }}</h4>
+		<h4>{{ server.idroom }}</h4>
+		<h4>{{ server.paihao }} </h4>
+		<h4><a href="/switch/edit/{{ server.id}}" style="color:#B60000; font-size:14px;">修改</a>&nbsp;&nbsp;<a href="#this" onclick="del('{{ url }}','/del/','{{server.id}}')" style="color:#B60000; font-size:14px;">删除</a></h4>
+            </dd>
+		{% endfor %}
+			<div class="clear"></div>
+        </dl>
+	{% endif %}
+        {% endblock %}

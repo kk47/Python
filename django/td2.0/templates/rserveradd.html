@@ -1,0 +1,178 @@
+    {% extends "base.html" %}
+    {% block head %}
+   <script language="javascript">
+//  var vDatatxt = " {{ datalist }}";
+  function find(sFind, sObj)
+   {
+     var nSize = sFind.length;
+     var nLen = sObj.length;
+
+     var sCompare;
+
+     if(nSize <= nLen ){
+         for(var i = 0; i <= nLen - nSize + 1; i++){
+             sCompare = sObj.substring(i, i + nSize);
+             if(sCompare == sFind){
+                 return i;
+             }
+         }
+     }
+
+     return -1;
+ }
+ 
+function findEach(vDatatxt,idname,keyword,ids){
+     var sFind = document.getElementById(keyword).value;
+     if(sFind==""){
+         alert("Can not be empty.");
+     }
+
+     if(sFind!=""){
+         var nPos;
+         var vResult = [],
+		 	values=[];
+         //for(var i = 0; i <= vData.length; i++){
+         var vData=vDatatxt.split(','),
+		 	vid=ids.split(',');
+         for(var i in vData){
+             var sTxt=vData[i]||'';
+             nPos = find(sFind, sTxt);
+
+             //nPos=sTxt.indexOf(sFind);
+             if(nPos>=0){
+                 vResult[vResult.length] = sTxt;
+				 for(var a=0; a<vData.length; a++){
+					 if(vData[a]==sTxt)values.push(a);
+				 }
+				 
+             }
+         }
+         var list='';
+       for(var i=0;i<vResult.length;i++){
+			// alert( vResult+">>>"+values[i])
+            list+='<option value="'+vid[values[i]]+'">'+vResult[i]+'</option>'
+         }
+         $("#"+idname).html(list)
+     }
+ }
+
+
+</script>
+    {% endblock %}
+    {% block content %}    
+	<h2><a href="javascript:void(0)">首页</a>&gt;&gt;<a href="javascript:void(0)">服务详细登记</a></h2>
+   <form action="" method="post">
+	<ul class="Exid">
+        	<li>
+            <label for="id_ip">IP地址:</label>
+            {{ form.ip }}
+	<font color="red" >{{ form.errors.ip }}</font>
+        </li>
+        <li>
+            <label for="id_device">设备类型:</label>
+            {{ form.device }}
+        </li>
+        <li>
+            <label for="id_devices">设备型号:</label>
+            {{ form.devices }}
+	<font color="red" >{{ form.errors.devices }}</font>
+        </li>
+              <li>
+            <label for="id_mouth">对联交换口:</label>
+            {{ form.mouth }}
+	<font color="red" >{{ form.errors.mouth }}</font>
+        </li>
+        <li>
+            <label for="id_fuwu">运行服务:</label>
+            {{ form.fuwu }}
+	<font color="red" >{{ form.errors.fuwu }}</font>
+        </li>
+		 <li>
+            <label for="id_version">服务版本:</label>
+            {{ form.version }}
+	<font color="red" >{{ form.errors.version }}</font>
+        </li>
+		   <li>
+            <label for="id_ports">服务端口:</label>
+            {{ form.ports }}
+	<font color="red" >{{ form.errors.ports }}</font>
+        </li>
+          <li>
+            <label for="id_configid">Confidig:</label>
+            {{ form.configid }}
+	<font color="red" >{{ form.errors.configid }}</font>
+        </li>
+           <li>
+            <label for="id_whoandyou">被谁依赖:</label>
+            {{ form.whoandyou }}
+	<font color="red" >{{ form.errors.whoandyou }}</font>
+        </li>
+	           <li>  
+            <label for="id_youandwho">依赖于谁:</label>
+            {{ form.youandwho }}
+	<font color="red" >{{ form.errors.youandwho }}</font>
+        </li>
+	                   <li>
+            <label for="id_start_time">起始时间:</label>
+            {{ form.start_time }}
+	<font color="red" >{{ form.errors.start_time }}</font>
+        </li>
+                   <li>
+            <label for="id_end_time">截止时间:</label>
+            {{ form.end_time }}
+	<font color="red" >{{ form.errors.end_time }}</font>
+        </li>
+
+<li>
+		 </li>
+		<li>
+        	<label style="margin:0;width:160px;">输入关键字查找MAC地址</label>
+            <input id='idmac' >
+        	<label style="width:100px;">网卡 MAC查询</label> 
+            <select id="id_idmac" name="idmac"  style="float:left">
+                    <option value="">请选择</option>
+            </select>
+	<font color="red" >{{ form.errors.idmac }}</font>
+			</li>
+			<li>
+			<input type="button" onclick="findEach('{% for id in maclist1 %}{{ id.eth0 }},{% endfor %}','id_idmac','idmac','{% for id in maclist1%}{{ id.id }},{% endfor %}')" value="eth0 MAC 搜索" />
+			<input type="button" onclick="findEach('{% for id in maclist1 %}{{ id.eth1 }},{% endfor %}','id_idmac','idmac','{% for id in maclist1%}{{ id.id }},{% endfor %}')" value="eth1 MAC 搜索" />
+			<input type="button" onclick="findEach('{% for id in maclist1 %}{{ id.eth2 }},{% endfor %}','id_idmac','idmac','{% for id in maclist1%}{{ id.id }},{% endfor %}')" value="eth2 MAC 搜索" />
+			<input type="button" onclick="findEach('{% for id in maclist1 %}{{ id.eth3 }},{% endfor %}','id_idmac','idmac','{% for id in maclist1%}{{ id.id }},{% endfor %}')" value="eth3 MAC 搜索" />
+			</li>
+			<li>
+        </li>
+		<li>
+
+                           <label style="margin:0;">输入关键字查找机柜</label>
+            <input id='idroom' >
+                        <input type="button" onclick="findEach('{% for id in datalist1%}{{ id.jigui }},{% endfor %}','id_idroom','idroom','{% for id in datalist1%}{{ id.id }},{% endfor %}')" value="查询" />
+                <label style="width:60px;">机柜</label>
+            <select id="id_idroom" name="idroom"  style="float:left">
+                    <option value="">请选择</option>
+            </select>
+	<font color="red" >{{ form.errors.idroom }}</font>
+        </li>
+                <li>
+
+                           <label style="margin:0;">输入关键字查找交换机</label>
+            <input id='idswitch' >
+                        <input type="button" onclick="findEach('{% for id in switchlist1 %}{{ id.ip }},{% endfor %}','id_idswitch','idswitch','{% for id in switchlist1%}{{ id.id }},{% endfor %}')" value="查询" />
+                <label style="width:60px;">交换机</label>
+            <select id="id_idswitch" name="idswitch"  style="float:left">
+                    <option value="">请选择</option>
+            </select>
+	<font color="red" >{{ form.errors.idswitch }}</font>
+        </li>
+                <li>
+                <input type="submit" value="提交" style="margin-left:150px;">
+                        <input type="reset" value="重置" style="margin-left:150px;">
+                        </li>
+
+
+        </ul>
+		</form> 
+    
+
+
+        {% endblock %}

@@ -1,0 +1,36 @@
+    {% extends "base.html" %}
+    {% block content %}    
+	<h2><a href="/">首页</a>&gt;&gt;<a href="javascript:void(0)">服务器硬件管理</a></h2>
+	<div align="right"><h3><a href="/yserver/add/" style="color:#B60000; font-size:14px;" >添加服务器</a></h3></div>
+	{% if data %}
+	<dl>
+        	<dt>
+            	<h3>eth0 MAC</h3>
+            	<h3>eth1 MAC</h3>
+            	<h3>eth2 MAC</h3>
+            	<h3>eth3 MAC</h3>
+		<h3>服务代码</h3>
+		<h3>CPU</h3>
+		<h3>内存</h3>
+		<h3>硬盘</h3>
+		<h3>机柜</h3>
+		<h3>操作</h3>
+            </dt>
+		 {% for server in data %}
+            <dd>
+            	<h4>{{ server.eth0 }}  </h4>
+            	<h4>{{ server.eth1 }} </h4>
+            	<h4>{{ server.eth2 }}</h4>
+            	<h4>{{ server.eth3 }}</h4>
+		<h4>{{ server.qcode }} </h4>
+		<h4>{{ server.cpu }}</h4>
+		<h4>{{ server.mem }}GB</h4>
+		<h4>{{ server.disk }}GB</h4>
+		<h4>{{ server.idroom.jigui}} </h4>
+		<h4><a href="/yserver/edit/{{ server.id}}"  style="color:#B60000; font-size:14px;">修改</a>&nbsp;&nbsp;<a href="#this" onclick="del({{server.id}})" style="color:#B60000; font-size:14px;">删除</a></h4>
+            </dd>
+		{% endfor %}
+			<div class="clear"></div>
+        </dl>
+	{% endif %}
+        {% endblock %}

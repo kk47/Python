@@ -1,0 +1,18 @@
+{% extends "base.html" %}    
+{% block title %} The Meta data of request{% endblock %}
+
+{% block content %}
+<table border="1">
+    <tr>
+        <td>Parameter</td>
+        <td>value</td>
+    </tr>
+
+{% for k, v in values %}
+    <tr>
+        <td>{{ k }}</td>
+        <td>{{ v }}</td>
+    </tr>
+{% endfor %}
+</table>
+{% endblock%}

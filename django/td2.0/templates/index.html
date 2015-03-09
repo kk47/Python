@@ -1,0 +1,188 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>LINUXQQ V0.2运维系统</title>
+<script src="/static/js/jquery-1.4.4.js"></script>
+<script src="/static/js/server_top.js" language="javascript"></script>
+<style type="text/css">
+<!--
+body {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+}
+.jjtable {
+	border-top-width: 0px;
+	border-right-width: 0px;
+	border-bottom-width: 0px;
+	border-left-width: 0px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: #CCCCCC;
+	border-right-color: #999999;
+	border-bottom-color: #999999;
+	border-left-color: #CCCCCC;
+}
+.jgtable {
+	border-top-width: 0px;
+	border-right-width: 0px;
+	border-bottom-width: 1px;
+	border-left-width: 0px;
+	border-bottom-style: solid;
+	border-bottom-color: #999999;
+	veritical-align: bottom;
+}
+.jgtitle {
+	color: #ffffff;
+	font-weight: bold;
+}
+.big_title {color: #FFFFFF;font-size:13px;}
+-->
+</style>
+{% block head %} {% endblock %}
+<link href="/static/css/css.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div class="top">
+    <div class="main">
+        <h1><a href="#this">TD支撑系统</a></h1>
+        <div class="loading">
+        欢迎！
+        	<a href="/user/change_pass/">管理员密码修改</a>
+        	<a href="/logout/">注销</a>
+        </div>
+        <div class="clear"></div>
+        <div class="select">
+            <label>请选择机房</label>
+            <select>
+                <option>世纪互联</option>
+                <option>鹏博士IDC</option>
+                <option>兆维</option>
+            </select>
+       </div>
+	          <div class="search">
+       	    <form class="form-horizontal" action="/search/" method="GET">
+                <input class="span2" type="text" name="q"  value="输入需要查找的内容" onfocus="if(this.value=='输入需要查找的内容')this.value=''" onblur="if(this.value=='')this.value='输入需要查找的内容'">
+				 <select  name="content"  style="float:left">
+                    <option value="1">机柜</option>
+					<option value="2">MAC地址</option>
+					<option value="3">IP地址</option>
+					<option value="4">服务</option>
+            </select>
+                <button class="btn" type="submit">搜一下</button>
+        </form>
+
+       </div>
+    </div>
+</div>
+<div class="main">
+	<ul class="menu">
+    	<li class="radius-top">
+			<a href="/">系统首页</a>
+		</li>
+    	<li>
+        	<a href="javascript:void(0)"><font>设备管理</font></a>
+            <ol class="hide">
+            	<li><a href="/jigui/" style="color:#000000">机柜管理</a></li>
+            	<li><a href="/switch/" style="color:#000000">网络设备管理</a></li>
+            	<li><a href="/yserver/" style="color:#000000">服务器管理</a></li>
+		<li><a href="/repair/" style="color:#000000">服务器维修历史</a></li>
+            </ol>
+        </li>
+    	<li>
+        	<a href="javascript:void(0)"><font>服务管理</font></a>
+            <ol class="hide">
+                <li><a href="/rserver/" style="color:#000000"> 服务详细登记</a></li>
+                <li><a href="/ipaddr/" style="color:#000000">IP地址管理</a></li>
+            </ol>
+        </li>
+    	<li>
+        	<a href="javascript:void(0)"><font>监控管理</font></a>
+            <ol class="hide">
+            	<li><a href="/cacti/" style="color:#000000">服务器监控</a></li>
+				<li><a href="/swcacti/" style="color:#000000">交换机监控</a></li>
+            </ol>
+        </li>
+    	<li class="radius-bottom">
+        	<a href="javascript:void(0)">配置管理</a>
+        </li>
+    </ul>
+    <div class="content">
+	{% if room %}
+<table cellspacing="3" cellpadding="1" border="0" bgcolor="#ffffff" class="jjtable">
+<tbody>
+<tr valign="bottom" align="center" id="tr">
+{% endif %}
+
+
+
+<script>
+var tr=$("#tr");
+"{% if room %}"
+	"{% for jiguis,servers,switch in room %}"
+	tr.append('<td width="147" bgcolor="#eeeeee" style=" height:440px;"  background="/static/img/jg.gif"><table cellspacing="0" cellpadding="1" border="0"><tbody><tr><td valign="bottom" height="30" align="center" class="jgtable" width="145"><font class="jgtitle">{{ jiguis.jigui }}</font></td></tr><tr id="td{{ jiguis.jigui }}"></tr>')
+var array=new Array(15),
+	tdtr=$("#td{{ jiguis.jigui }}");
+	"{%for switchs in switch%}"
+			var c="{{switchs.paihao}}",
+				ip="{{ switchs.ip }}".split("."),
+				idip=ip.join("");
+			array[c-1]='<tr><td valign="bottom" align="center" height="30" class="jgtable"><img width="127" height="15" onmouseout="hiddenDIV(\'operate'+idip+'\'); return false" onmouseover="displayDIV(\'operate'+idip+'\'); return false" style="vertical-align: bottom;" src="/static/img/switch.gif"><div style="border-style: outset; border-color: -moz-use-text-color; border-width: 1px 2px 2px 1px; background: rgb(255, 255, 255) none repeat scroll 0% 0%; display: none; position: absolute; width: 200px; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; text-align: left;" id="operate'+idip+'"><table cellspacing="1" cellpadding="3"><tbody><tr><td style="text-align: left;">交换机IP:{{ switchs.ip }}<br>位置:{{ switchs.paihao }}</td></tr></tbody></table></div></td></tr>'
+		"{%endfor%}"
+		"{% for server in servers %}"
+		var a="{{ server.idmac.paihao }}",
+			aip="{{ server.ip }}".split("."),
+			aipid=aip.join("");
+			array[a-1]='<tr><td valign="bottom" align="center" height="30" class="jgtable"><img width="127" height="15" onmouseout="hiddenDIV(\'operate'+aipid+'\'); return false" onmouseover="displayDIV(\'operate'+aipid+'\'); return false" style="vertical-align: bottom;" src="/static/img/{{ server.is_avlie }}.gif"><div style="border-style: outset; border-color: -moz-use-text-color; border-width: 1px 2px 2px 1px; background: rgb(255, 255, 255) none repeat scroll 0% 0%; display: none; position: absolute; width: 200px; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; text-align: left;" id="operate'+aipid+'"><table cellspacing="1" cellpadding="3"><tbody><tr><td style="text-align: left;">服务器IP:{{ server.ip }}<br>运行服务:{{ server.fuwu }}<br>位置:{{ server.idmac.paihao }} <br>机型:{{ server.idmac.uname }}<br></td></tr></tbody></table></div></td></tr>';
+		"{% endfor %}"
+		for(var i=0; i<array.length; i++){
+			if(!array[i])array[i]='<tr><td valign="bottom" align="center" height="30" class="jgtable"></td></tr>';
+			tdtr.prepend(array[i]);
+		}
+	"{% endfor %}"
+"{% endif %}"
+
+</script>
+
+
+
+
+
+</tr>
+</tbody></table>
+
+
+<td background="/static/img/jg.gif" bgcolor="#eeeeee" width="147">
+
+    	    <div style="width:650px; float:left; overflow:hidden; margin-left:30px;"  align="right" >
+    	                    {% if data.has_previous %}
+    	                            <a href="" style="color:#000000"  >上一页</a>
+    	                                    {% endif %}
+    	                                    	 {% if data.number %}
+    	                                            当前页 {{ data.number }} 共 {{ data.paginator.num_pages }}
+    	                                            {% endif %}
+    	                                                    {% if data.has_next %}
+    	                                                            <a href="" style="color:#000000">下一页</a>
+
+    {% endif %}
+
+    </div>
+
+    </div>
+</div>
+<script>
+var menu=$(".menu li");
+if($(menu).find("ol")){
+	$(menu).find("a").click(function(){
+		$(menu).find("ol").slideUp();
+		$(this).parent().find("ol").slideToggle();
+	});
+};
+
+</script>
+</body>
+</html>

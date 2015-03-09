@@ -1,0 +1,126 @@
+    {% extends "base.html" %}
+    {% block head %}
+<script language="javascript">
+//var vDatatxt = " {{ datalist }}";
+  function find(sFind, sObj)
+   {
+     var nSize = sFind.length;
+     var nLen = sObj.length;
+
+     var sCompare;
+
+     if(nSize <= nLen ){
+         for(var i = 0; i <= nLen - nSize + 1; i++){
+             sCompare = sObj.substring(i, i + nSize);
+             if(sCompare == sFind){
+                 return i;
+             }
+         }
+     }
+
+     return -1;
+ }
+ 
+function findEach(vDatatxt,idname,keyword,ids){
+     var sFind = document.getElementById(keyword).value;
+     if(sFind==""){
+         alert("Can not be empty.");
+     }
+
+     if(sFind!=""){
+         var nPos;
+         var vResult = [],
+		 	values=[];
+         //for(var i = 0; i <= vData.length; i++){
+         var vData=vDatatxt.split(','),
+		 	vid=ids.split(',');
+         for(var i in vData){
+             var sTxt=vData[i]||'';
+             nPos = find(sFind, sTxt);
+
+             //nPos=sTxt.indexOf(sFind);
+             if(nPos>=0){
+                 vResult[vResult.length] = sTxt;
+				 for(var a=0; a<vData.length; a++){
+					 if(vData[a]==sTxt)values.push(a);
+				 }
+				 
+             }
+         }
+         var list='';
+       for(var i=0;i<vResult.length;i++){
+			// alert( vResult+">>>"+values[i])
+            list+='<option value="'+vid[values[i]]+'">'+vResult[i]+'</option>'
+         }
+         $("#"+idname).html(list)
+     }
+ }
+
+</script>	
+    {% endblock %}
+    {% block content %}    
+	<h2><a href="javascript:void(0)">首页</a>&gt;&gt;<a href="javascript:void(0)">机柜管理</a></h2>
+   <form action="" method="post">
+	<ul class="Exid">
+        	<li>
+            <label for="id_eth0">eth0:</label>
+            {{ form.eth0 }}
+	 <font color="red" >{{ form.errors.eth0 }}</font>
+        </li>
+        <li>
+            <label for="id_eth1">eth1:</label>
+            {{ form.eth1 }}
+	  <font color="red" >{{ form.errors.eth1 }}</font>
+        </li>
+        <li>
+            <label for="id_eth2">eth2:</label>
+            {{ form.eth2 }}
+	<font color="red" >{{ form.errors.eth2 }}</font>
+        </li>
+        <li>
+            <label for="id_eth3">eth3:</label>
+            {{ form.eth3 }}
+	<font color="red" >{{ form.errors.eth3 }}</font>
+        </li>
+        <li>
+            <label for="id_cpu">CPU:</label>
+            {{ form.cpu }}
+	<font color="red" >{{ form.errors.cpu }}</font>
+        </li>	
+              <li>
+            <label for="id_mem">内存:</label>
+            {{ form.mem }}
+        </li>
+        <li>
+            <label for="id_disk">硬盘:</label>
+            {{ form.disk }}
+        </li>
+		 <li>
+            <label for="id_qcode">快速服务代码:</label>
+            {{ form.qcode }}
+	<font color="red" >{{ form.errors.qcode }}</font>
+        </li>
+                 <li>
+            <label for="id_uname">U数:</label>
+            {{ form.uname }}
+        </li>
+	                 <li>
+            <label for="id_paihao">机柜排序:</label>
+            {{ form.paihao }}
+        <font color="red" >{{ form.errors.paihao }}</font>
+        </li><li>
+                           <label style="margin:0;">输入关键字查找机柜</label>
+            <input id='idroom' >
+                        <input type="button" onclick="findEach('{% for id in datalist1%}{{ id.jigui }},{% endfor %}','id_idroom','idroom','{% for id in datalist1%}{{ id.id }},{% endfor %}')" value="查询" />
+            <select id="id_idroom" name="idroom"  style="float:left">
+                    <option value="">请选择</option>
+            </select>
+	<font color="red" >{{ form.errors.idroom }}</font>
+        </li>
+        </ul>
+		<input type="submit" value="添加">
+		</form> 
+    
+
+
+        {% endblock %}

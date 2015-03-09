@@ -1,0 +1,13 @@
+    <form class="form-horizontal" action="/search/" method="GET">
+                <input class="span2" type="text" name="q"  placeholder="输入需要查找的内容">
+				 <select  name="content"  style="float:left">
+                    <option value="1">机柜</option>
+					<option value="2">MAC地址</option>
+					<option value="3">IP地址</option>
+					<option value="4">服务</option>
+            </select>
+                <button class="btn" type="submit">搜一下</button>
+        </form>
+  {% for data in datalist %} 
+ {{ data.jigui }}
+ {% endfor %}

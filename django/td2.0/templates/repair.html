@@ -1,0 +1,28 @@
+    {% extends "base.html" %}
+    {% block content %}    
+	<h2><a href="javascript:void(0)">首页</a>&gt;&gt;<a href="javascript:void(0)">服务器维修记录</a></h2>
+	<div align="right"><h3><a href="/repair/add/" style="color:#B60000; font-size:14px;">添加服务器维修记录</a></h3></div>
+	{% if data %}
+	<dl>
+        	<dt>
+            	<h3>维修历史</h3>
+		<h3>eth0 MAC</h3>
+		<h3>eth1 MAC</h3>
+		<h3>eth2 MAC</h3>
+		<h3>eth3 MAC</h3>
+		<h3>操作</h3>
+            </dt>
+		 {% for server in data %}
+            <dd>
+            	<h4>{{ server.repair }}  </h4>
+		<h4>{{ server.idmac.eth0 }} </h4>
+		<h4>{{ server.idmac.eth1 }} </h4>
+		<h4>{{ server.idmac.eth2 }} </h4>
+		<h4>{{ server.idmac.eth3 }} </h4>
+		<h4><a href="edit/{{ server.id}}" style="color:#B60000; font-size:14px;">修改</a>&nbsp;&nbsp;<a href="del/{{ server.id}}" style="color:#B60000; font-size:14px;">删除</a></h4>
+            </dd>
+		{% endfor %}
+			<div class="clear"></div>
+        </dl>
+	{% endif %}
+        {% endblock %}

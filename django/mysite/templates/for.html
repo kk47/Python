@@ -1,0 +1,12 @@
+{% for country in countries %}
+    <table>
+    {% for city in country.city_list %}
+        <tr>
+        <td>Country #{{ forloop.parentloop.counter }}</td>
+        <td>City #{{ forloop.counter }}</td>
+        <td>{{ city }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+{% endfo %}
+

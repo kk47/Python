@@ -1,0 +1,55 @@
+    {% extends "base.html" %}
+    {% block content %}    
+	<h2><a href="/">首页</a>&gt;&gt;<a href="javascript:void(0)">服务详细登记</a></h2>
+	<div align="right"><h3><a href="/rserver/add/" style="color:#B60000; font-size:14px;">添加服务详细登记</a></h3></div>
+	{% if data %}
+	<dl>
+        	<dt>
+            	<h3>IP地址</h3>
+            	<h3>设备类型</h3>
+            	<h3>设备型号</h3>
+		<h3>对联交换口</h3>
+		<h3>运行服务</h3>
+		<h3>服务版本</h3>
+		<h3>服务端口</h3>
+		<h3>Configld</h3>
+		<h3>被谁依赖</h3>
+		<h3>依赖于谁</h3>
+		<h3>起始时间</h3>
+		<h3>结束时间</h3>
+		<h3>eth0 MAC</h3>
+		<h3>eth1 MAC</h3>
+		<h3>eth2 MAC</h3>
+		<h3>eth3 MAC</h3>
+		<h3>所属机柜</h3>
+		<h3>交换机IP</h3>
+		<h3>操作</h3>
+            </dt>
+		 {% for server in data %}
+            <dd>
+            	<h4>{{ server.ip }} </h4>
+            	<h4>{{ server.device }} </h4>
+            	<h4>{{ server.devices }}</h4>
+		<h4>{{ server.mouth }}口</h4>
+		<h4>{{ server.fuwu }}</h4>
+		<h4>{{ server.version }}</h4>
+		<h4>{{ server.ports }} </h4>
+		<h4>{{ server.configid }}</h4>
+		<h4>{{ server.whoandyou }}</h4>
+		<h4>{{ server.youandwho }} </h4>
+		<h4>{{ server.start_time|date:"Y年 F j日"  }} </h4> {% if server.end_time|date:"Y-m-d" < today|date:"Y-m-d" %} 
+		<h4><span style="color:red">{{ server.end_time|date:"Y年 F j日" }}</span></h4> {% else %}
+		<h4>{{ server.end_time|date:"Y年 F j日" }}</h4> {% endif %}
+		<h4>{{ server.idmac.eth0 }} </h4>
+		<h4>{{ server.idmac.eth1 }} </h4>
+		<h4>{{ server.idmac.eth2 }} </h4>
+		<h4>{{ server.idmac.eth3 }} </h4>
+		<h4>{{ server.idroom.jigui }}</h3>
+		<h4>{{ server.idswitch.ip }} </h3>
+		<h4><a href="/rserver/edit/{{ server.id}}" style="color:#B60000; font-size:14px;">修改</a>&nbsp;&nbsp;<a href="#this" onclick="del({{server.id}})" style="color:#B60000; font-size:14px;">删除</a></h4>
+            </dd>
+		{% endfor %}
+			<div class="clear"></div>
+        </dl>
+	{% endif %}
+        {% endblock %}
