@@ -2,7 +2,7 @@
 import time
 import logging
 
-class Test(object):
+class Profiler(object):
 
     def _profiler(func):
         def func_wrapper(self, *args, **kwargs):
@@ -26,6 +26,6 @@ class Test(object):
 
 if __name__ == "__main__":
     
-    t = Test()
+    t = Profiler()
     print t.foo("Lucky", 'boy')
     print t.bar('Handsome')
